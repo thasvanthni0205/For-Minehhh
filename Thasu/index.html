@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Magical Romantic Page</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        background: linear-gradient(to bottom, #2c003e, #7e1f6a);
+        font-family: 'Segoe UI', sans-serif;
+        color: #fff;
+        text-align: center;
+    }
+
+    /* Stars & Hearts */
+    .heart, .star {
+        position: absolute;
+        font-size: 16px;
+        animation: float 6s linear infinite;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    @keyframes float {
+        0% {transform: translateY(0) rotate(0deg);}
+        100% {transform: translateY(-100vh) rotate(360deg);}
+    }
+
+    /* Rose Button */
+    #bloomBtn {
+        margin-top: 50px;
+        padding: 15px 30px;
+        font-size: 20px;
+        border: none;
+        border-radius: 10px;
+        background: pink;
+        color: #4b004b;
+        cursor: pointer;
+        box-shadow: 0 0 20px rgba(255, 182, 193, 0.7);
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Glow animation for button */
+    #bloomBtn.glow {
+        box-shadow: 0 0 30px rgba(255, 182, 193, 1), 0 0 60px rgba(255, 105, 180, 0.7);
+        animation: pulse 1.5s infinite alternate;
+    }
+
+    @keyframes pulse {
+        0% { box-shadow: 0 0 20px rgba(255, 182, 193, 0.7), 0 0 40px rgba(255, 105, 180, 0.5); }
+        100% { box-shadow: 0 0 30px rgba(255, 182, 193, 1), 0 0 60px rgba(255, 105, 180, 0.7); }
+    }
+
+    /* Rose Bloom Animation */
+    .rose {
+        width: 0;
+        height: 0;
+        margin: 50px auto;
+        background: radial-gradient(circle, #ff4d7f, #ff87b1);
+        border-radius: 50%;
+        opacity: 0;
+        transition: all 2s ease-in-out;
+        position: relative;
+    }
+
+    .rose.bloom {
+        width: 150px;
+        height: 150px;
+        opacity: 1;
+        box-shadow: 0 0 50px rgba(255, 105, 180, 0.8);
+    }
+
+    /* Text inside rose */
+    .roseText {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        font-size: 20px;
+        font-weight: bold;
+        pointer-events: none;
+    }
+
+    /* Decoded Message */
+    #messageContainer {
+        margin-top: 30px;
+        font-size: 24px;
+        min-height: 50px;
+    }
+
+    .signature {
+        margin-top: 20px;
+        font-size: 18px;
+        color: #ffd1dc;
+    }
+
+    input, button {
+        margin: 5px;
+        border-radius: 5px;
+        border: none;
+    }
+</style>
+</head>
+<body>
+
+<!-- Button to Bloom Rose -->
+<button id="bloomBtn">For You</button>
+
+<!-- Rose -->
+<div class="rose" id="rose">
+    <div class="roseText" id="roseText"></div>
+</div>
+
+<!-- Name Input for Decoded Message -->
+<div>
+    <input type="text" id="nameInput" placeholder="Enter your name" style="padding:10px; font-size:18px;">
+    <button onclick="revealMessage()" style="padding:10px; font-size:18px;">Reveal Magic</button>
+</div>
+
+<!-- Decoded Message -->
+<div id="messageContainer"></div>
+
+<!-- Signature -->
+<div class="signature">Created by yours, Thasvanthni</div>
+
+<!-- Audio -->
+<audio id="bgMusic">
+    <source src="Kadhal_Kanava_Ringtone.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    const rose = document.getElementById('rose');
+    const bloomBtn = document.getElementById('bloomBtn');
+    const bgMusic = document.getElementById('bgMusic');
+
+    // Hearts & Stars
+    const messages = ["You are magical", "Your smile shines", "Bala is special", "Code turns into magic"];
+    function createHeartStar() {
+        for(let i=0;i<30;i++){
+            let el = document.createElement('div');
+            el.className = Math.random() > 0.5 ? 'heart' : 'star';
+            el.innerHTML = el.className==='heart'?'❤':'✦';
+            el.style.left = Math.random()*100+'vw';
+            el.style.top = Math.random()*100+'vh';
+            el.style.fontSize = (10 + Math.random()*20) + 'px';
+            el.style.animationDuration = (5 + Math.random()*5) + 's';
+            el.addEventListener('mouseover', ()=>{ 
+                alert(messages[Math.floor(Math.random()*messages.length)]); 
+            });
+            document.body.appendChild(el);
+        }
+    }
+    createHeartStar();
+
+    // Bloom Rose & Play Music
+    bloomBtn.addEventListener('click', () => {
+        rose.classList.add('bloom');
+        bgMusic.play();
+
+        // Show "Thasubala" inside the rose
+        document.getElementById('roseText').innerText = "Thasubala";
+
+        // Add glow to the button
+        bloomBtn.classList.add('glow');
+    });
+
+    // Decoded Message Animation
+    function revealMessage() {
+        const name = document.getElementById('nameInput').value || "Bala";
+        const message = `You have this way of making everyone around you feel special… especially me
+                         I swear you just made my day without even try
+                         Every time you talk, I feel like I’m hearing my favorite song
+                         You make ordinary moments feel unforgettable
+                         I never believed in magic… until I met you
+                         Stop being so attractive… you’re making it hard to focus
+                         I’m starting to think you’re secretly a magician… how else do you do this?
+                         Careful, talking to you is addictive
+                         I like how you manage to be both charming and mysterious at the same time
+                         Are you always this irresistible, or is it just for me?
+                         Being around you feels like coming home
+                         I don’t know how, but you make everything feel lighter and happier
+                         You have this effect on me… like I suddenly believe in everything good
+                         I catch myself smiling whenever I think about you
+                         You make the world feel brighter… and I’m glad I get to see it with you
+                         You have a rare way of making people feel understood
+                         It’s amazing how you can make someone feel important just by being yourself
+                         I admire how confident and genuine you are—it’s inspiring
+                         You have this quiet strength that I can’t stop noticing
+                         Some people enter your life and change it… you’re one of those people.`;
+        const container = document.getElementById('messageContainer');
+        container.innerHTML = '';
+        let index = 0;
+
+        function typeLetter() {
+            if(index < message.length){
+                container.innerHTML += message.charAt(index);
+                index++;
+                setTimeout(typeLetter, 100);
+            }
+        }
+        typeLetter();
+    }
+</script>
+</body>
+</html>
